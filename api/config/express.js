@@ -4,6 +4,7 @@ import config from './config'
 import sequelize from '../config/database'
 import userModel from '../models/user.model'
 import userRouter from '../router/user.route'
+import bodyParser from 'body-parser'
 
 const createApp = {
     setup:()=>{
@@ -20,6 +21,9 @@ const createApp = {
         sequelize.authenticate().then().catch(err=>{
             console.log('error',err)
         })
+
+        //use body-parser
+        app.use(bodyParser.urlencoded({extended: false}))
 
         app.use(userRouter)
 
